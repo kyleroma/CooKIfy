@@ -9,47 +9,35 @@ function toggleTheme() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
 
+const name = ref('')
 const email = ref('')
 const password = ref('')
-const emailRules = [
-  (v) => !!v || 'E-mail is required',
-  (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'E-mail must be valid',
-]
+const confirmPassword = ref('')
+
+const nameRules = [(v) => !!v || 'Name is required']
+const emailRules = [(v) => !!v || 'E-mail is required']
 const passwordRules = [(v) => !!v || 'Password is required']
+const confirmPasswordRules = [
+  (v) => !!v || 'Confirm Password is required',
+  (v) => v === password.value || 'Passwords must match',
+]
 
-const validCredentials = {
-  email: 'test@cookify.com',
-  password: 'password123',
+function handleBackToLogin() {
+  router.push({ name: 'login' })
 }
 
-function handleLogin() {
-  if (email.value && password.value) {
-    if (email.value === validCredentials.email && password.value === validCredentials.password) {
-      alert('Login successful! Welcome to CooKify!')
-
-      router.push({ name: 'home' })
-    } else {
-      alert('Invalid email or password. Please try again.')
-    }
+function handleRegister() {
+  if (name.value && email.value && password.value && confirmPassword.value === password.value) {
+    alert('Registration successful!')
+    router.push({ name: 'login' })
   } else {
-    alert('Please fill in all required fields.')
+    alert('Please fill in all required fields correctly.')
   }
-}
-
-function handleRegisterRedirect() {
-  router.push({ name: 'register' })
 }
 </script>
 
 <template>
-  <v-responsive
-    class="border rounded"
-    style="
-      background: url('public/img/467457975_540707448765983_2165938018579944350_n.png') no-repeat
-        center center / cover;
-      height: 100vh;
-    "
-  >
+  <v-responsive class="border rounded">
     <v-app :theme="theme">
       <!-- App Bar -->
       <v-app-bar class="px-3" elevation="3">
@@ -75,18 +63,27 @@ function handleRegisterRedirect() {
                 elevation="15"
               >
                 <template v-slot:title>
-                  <h2 class="text-h5 font-weight-bold">Welcome to CooKify!</h2>
+                  <h2 class="text-h5 font-weight-bold">Create an Account</h2>
                 </template>
 
                 <v-card-text class="py-3">
-                  Discover and create delicious meals effortlessly with our detailed recipes,
-                  step-by-step instructions, and expert tips. Sign in now to start your culinary
-                  journey!
+                  Join CooKify today and discover the joy of cooking with personalized recipes and
+                  expert tips. Sign up now!
                 </v-card-text>
               </v-card>
 
-              <!-- Login Form -->
-              <v-form fast-fail @submit.prevent="handleLogin">
+              <!-- Registration Form -->
+              <v-form fast-fail @submit.prevent="handleRegister">
+                <v-text-field
+                  v-model="name"
+                  :rules="nameRules"
+                  label="Name"
+                  variant="outlined"
+                  clearable
+                  outlined
+                  class="mt-4"
+                ></v-text-field>
+
                 <v-text-field
                   v-model="email"
                   :rules="emailRules"
@@ -109,13 +106,24 @@ function handleRegisterRedirect() {
                   class="mt-4"
                 ></v-text-field>
 
+                <v-text-field
+                  v-model="confirmPassword"
+                  :rules="confirmPasswordRules"
+                  label="Confirm Password"
+                  type="password"
+                  variant="outlined"
+                  clearable
+                  outlined
+                  class="mt-4"
+                ></v-text-field>
+
                 <v-btn class="mt-4" type="submit" block color="primary" elevation="2">
-                  Login
+                  Register
                 </v-btn>
 
-                <!-- Register Button -->
-                <v-btn class="mt-2" text block color="secondary" @click="handleRegisterRedirect">
-                  Don't have an account? Register here.
+                <!-- Back to Login Button -->
+                <v-btn class="mt-2" text block color="secondary" @click="handleBackToLogin">
+                  Already have an account? Login here.
                 </v-btn>
               </v-form>
             </v-col>
