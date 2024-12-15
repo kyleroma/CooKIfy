@@ -77,7 +77,17 @@ function handleRegister() {
                 <v-text-field
                   v-model="name"
                   :rules="nameRules"
-                  label="Name"
+                  label="First Name"
+                  variant="outlined"
+                  clearable
+                  outlined
+                  class="mt-4"
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="name"
+                  :rules="nameRules"
+                  label="Last Name"
                   variant="outlined"
                   clearable
                   outlined
