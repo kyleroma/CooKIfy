@@ -18,14 +18,14 @@ const emailRules = [
 const passwordRules = [(v) => !!v || 'Password is required']
 
 const validCredentials = {
-  email: 'test@cookify.com',
+  email: 'test@codebuddy.com',
   password: 'password123',
 }
 
 function handleLogin() {
   if (email.value && password.value) {
     if (email.value === validCredentials.email && password.value === validCredentials.password) {
-      alert('Login successful! Welcome to CooKify!')
+      alert('Login successful! Welcome to CodeBuddy!')
 
       router.push({ name: 'home' })
     } else {
@@ -53,7 +53,7 @@ function handleRegisterRedirect() {
     <v-app :theme="theme">
       <!-- App Bar -->
       <v-app-bar class="px-3" elevation="3">
-        <span class="text-h6 font-weight-medium">CooKify</span>
+        <span class="text-h6 font-weight-medium">Codebuddy</span>
         <v-spacer></v-spacer>
         <v-btn
           :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
@@ -75,7 +75,7 @@ function handleRegisterRedirect() {
                 elevation="15"
               >
                 <template v-slot:title>
-                  <h2 class="text-h5 font-weight-bold">Welcome to CooKify!</h2>
+                  <h2 class="text-h5 font-weight-bold">Welcome to Codebuddy!</h2>
                 </template>
 
                 <v-card-text class="py-3">
