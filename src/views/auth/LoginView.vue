@@ -75,7 +75,7 @@ function handleRegisterRedirect() {
                 elevation="15"
               >
                 <template v-slot:title>
-                  <h2 class="text-h5 font-weight-bold">Welcome to our it107 project!</h2>
+                  <h2 class="text-h5 font-weight-bold">Welcome to our IT107 project!</h2>
                 </template>
 
                 <v-card-text class="py-3">
